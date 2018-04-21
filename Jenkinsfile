@@ -17,14 +17,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                def fname = '/var/www/html/${currentBuild.fullDisplayName}'
                 
-                def exists = new File(fname).exists()
-                
-                if( exists )
-                  sh 'rm ${fname} -rf'
-                
-                sh 'mkdir /var/www/html/${currentBuild.fullDisplayName}'                
+                sh 'rm -rf /var/www/html/${currentBuild.fullDisplayName} && mkdir /var/www/html/${currentBuild.fullDisplayName}'                
                 sh 'cp src/* /var/www/html/${currentBuild.fullDisplayName}/'
             }
         }

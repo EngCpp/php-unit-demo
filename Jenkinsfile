@@ -17,13 +17,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                def folder = new File('/var/www/html/${currentBuild.fullDisplayName}')
-                /*
-                if( folder.exists() )
-                    folder.deleteDir() 
+                def fname = '/var/www/html/${currentBuild.fullDisplayName}'
                 
-                folder.mkdirs()
-                */
+                def exists = new File(fname).exists()
+                
+                if( exists )
+                  sh 'rm ${fname} -rf'
+                
+                sh 'mkdir /var/www/html/${currentBuild.fullDisplayName}'                
                 sh 'cp src/* /var/www/html/${currentBuild.fullDisplayName}/'
             }
         }

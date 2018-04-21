@@ -10,6 +10,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh 'phpunit --bootstrap src/* --testdox tests'
             }
         }
         stage('Deploy') {

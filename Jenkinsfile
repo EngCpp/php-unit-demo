@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'phpunit --bootstrap src/* --testdox tests'
+                sh 'phpunit --bootstrap src/Email.php --testdox tests'
             }
         }
         stage('Deploy') {

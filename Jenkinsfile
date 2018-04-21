@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                File folder = new File("/var/www/html/${currentBuild.fullDisplayName}");
+                File folder = new File("/var/www/html/${currentBuild.fullDisplayName}")
                 
                 if( folder.exists() )
                     folder.deleteDir() 

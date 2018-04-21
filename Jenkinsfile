@@ -17,7 +17,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'rm /var/www/html/${currentBuild.fullDisplayName} -rf'
+                
+                if [ -d '/var/www/html/${currentBuild.fullDisplayName}' ]; then
+                   sh 'rm /var/www/html/${currentBuild.fullDisplayName} -rf' 
+                fi
+                
                 sh 'mkdir /var/www/html/${currentBuild.fullDisplayName}/'
                 sh 'cp src/* /var/www/html/${currentBuild.fullDisplayName}/'
             }

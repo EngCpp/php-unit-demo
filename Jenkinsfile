@@ -17,12 +17,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                def folder = new File("/var/www/html/${currentBuild.fullDisplayName}");
                 
-                if [ -d '/var/www/html/${currentBuild.fullDisplayName}' ]; then
-                   sh 'rm /var/www/html/${currentBuild.fullDisplayName} -rf' 
-                fi
+                if( folder.exists() )
+                    folder.deleteDir() 
                 
-                sh 'mkdir /var/www/html/${currentBuild.fullDisplayName}/'
+                folder.mkdirs()
+                
                 sh 'cp src/* /var/www/html/${currentBuild.fullDisplayName}/'
             }
         }
